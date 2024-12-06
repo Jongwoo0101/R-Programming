@@ -19,3 +19,21 @@ df_nomiss
 
 df_nomiss2 <- na.omit(df)
 df_nomiss2
+
+mean(df$score, na.rm = TRUE)
+
+df %>% summarise(sum_score = sum(score, na.rm = TRUE),
+                 mean_score = mean(score, na.rm = TRUE),
+                 median_score = median(score, na.rm = TRUE))
+
+exam <- read.csv("csv_exam.csv")
+exam[c(3, 8, 12), "science"] <- NA
+
+mean(exam$science, na.rm = TRUE)
+
+pred.science <- mean(exam$science, na.rm = TRUE)
+exam$science <- ifelse(is.na(exam$science), pred.science, exam$science)
+
+
+
+
