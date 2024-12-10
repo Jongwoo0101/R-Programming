@@ -34,6 +34,27 @@ mean(exam$science, na.rm = TRUE)
 pred.science <- mean(exam$science, na.rm = TRUE)
 exam$science <- ifelse(is.na(exam$science), pred.science, exam$science)
 
+out <- data.frame(gender = c(1, 0, 5, 1, 0)
+                  , score = c(5, 4, 3, 4, 5))
 
+out
+out <- ifelse(out$gender == 5, NA, out$gender)
+out
+
+out %>%
+  filter(!is.na(gender) & !is.na(score)) %>%
+  group_by(gender) %>%
+  summarise(mean_score = mean(score))
+
+library(ggplot2)
+boxplot(mpg$hwy)
+box.value <- boxplot(mpg$hwy)$stats
+box.value
+mpg$hwy <- ifelse(mpg$hwy < box.value[1] | mpg$hwy > box.value[5],
+                  NA, mpg$hwy)
+table(is.na(mpg$hwy))
+mpg %>%
+  group_by(drv) %>%
+  summarise(mean_hwy = mean(hwy, na.rm = TRUE))
 
 
